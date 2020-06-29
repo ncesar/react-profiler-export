@@ -1,7 +1,6 @@
 import React, { Profiler } from 'react';
 
-const ProfilerWrapper = (props) => {
-  const sendToJson = (props) => {};
+export const ProfilerWrapper = ({ children }) => {
   function onRenderCallback(
     id,
     phase,
@@ -11,7 +10,7 @@ const ProfilerWrapper = (props) => {
     commitTime,
     interactions,
   ) {
-    return {
+    const providerData = {
       id,
       phase,
       actualDuration,
@@ -20,22 +19,7 @@ const ProfilerWrapper = (props) => {
       commitTime,
       interactions,
     };
+    console.log(providerData);
   }
-  let profilerProps;
-  const {
-    id,
-    phase,
-    actualDuration,
-    baseDuration,
-    startTime,
-    commitTime,
-    interactions,
-  } = profilerProps;
-  return (
-    <Profiler onRender={onRenderCallback} {...profilerProps}>
-      {props.children}
-    </Profiler>
-  );
+  return <Profiler onRender={onRenderCallback}>{children}</Profiler>;
 };
-
-export default ProfilerWrapper;
